@@ -5902,7 +5902,7 @@ void atg_count_nonzero_out(tensor *out__, tensor out, tensor self, int64_t dim_v
 
 void atg_cov(tensor *out__, tensor self, int64_t correction, tensor fweights, tensor aweights) {
   PROTECT(
-    auto outputs__ = torch::cov(*self, correction, (fweights ? *fweights : torch::Tensor()), (aweights ? *aweights : torch::Tensor()));
+    auto outputs__ = torch::cov(*self, correction, (fweights ? ::std::optional<at::Tensor>(*fweights) : ::std::nullopt), (aweights ? ::std::optional<at::Tensor>(*aweights) : ::std::nullopt));
     out__[0] = new torch::Tensor(outputs__);
   )
 }
